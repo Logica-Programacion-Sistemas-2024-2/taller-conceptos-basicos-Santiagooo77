@@ -1,6 +1,8 @@
+import java.util.Scanner;
+import java.lang.Math;
 package sistemas;
+public class App;
 
-public class App 
     
     // Diseñe un algoritmo para saludar al usuario: Hola usuario. El nombre del usuario es ingresado por teclado
     public class SaludarUsuario {
@@ -42,7 +44,7 @@ public class App
     }
 
     // Solicitar al usuario ingresar una cantidad expresada en cc (centímetros cúbicos) y devolver su cantidad en litros
-    public class ConversorVolumen {
+        public class ConversorVolumen {
         public static void main(String[] args) {
             Scanner scanner = new Scanner(System.in);
     
@@ -59,14 +61,22 @@ public class App
     }
 
     // Solicitar al usuario ingresar una cantidad en dólares y convertirla a pesos según la TRM del día
-    public static int convertirDolaresAPesos(double dolares, double trm) {
-        try {
-            // Lógica interna
-        } catch (Exception e) {
-            return -1;
+        public class ConvertirDolaresAPesos {
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+    
+            // Pedir la cantidad en dólares al usuario
+            System.out.print("Ingrese la cantidad en dólares: ");
+            double cantidadDolares = scanner.nextDouble();
+    
+            // Convertir la cantidad en dólares a pesos según la TRM del día
+            double trm = 4110.37; // TRM del día (1 USD = 4110.37 COP)
+            double cantidadPesos = cantidadDolares * trm;
+    
+            System.out.println("La cantidad en pesos es: " + cantidadPesos);
         }
-        return 0;
     }
+        
 
     // Solicitar al usuario ingresar la temperatura en grados centígrados y convertirla en grados Fahrenheit (averiguar la fórmula) F = 32 + ( 9 * C / 5)
     public class ConversorTemperatura {
@@ -115,8 +125,9 @@ public class App
 
     // Un usuario tiene un sistema de báscula para pesar camiones, dado el peso de un camión debe sacar el peso neto de la carga en kilos y toneladas
     // retorne el valor en formato string (pesoEnKg + "|" + pesoEnToneladas)
-public class CalculadoraPeso {
+    public class CalculadoraPeso {
     public static String calcularPesoNeto(double pesoBruto, double pesoCamion) {
+        Scanner scanner = new Scanner(System.in);  
         // Calcular peso neto en kilos
         double pesoNetoEnKg = pesoBruto - pesoCamion;
 
@@ -138,7 +149,7 @@ public class CalculadoraPeso {
 }
 
     // Diseñe un algoritmo que calcule el tiempo necesario para alcanzar un destino dado por el usuario quien además ingresará la velocidad promedio en kilómetros/hora y la distancia en kilómetros
-    public static int calcularTiempoViaje(double distancia, double velocidadKilometros, double velocidadHora) {
+        public static int calcularTiempoViaje(double distancia, double velocidadKilometros, double velocidadHora) {
         public static void main(String[] args) {
             Scanner scanner = new Scanner(System.in);
     
@@ -278,7 +289,7 @@ public class CalculadoraPeso {
     }
 
     // Elaborar un algoritmo que dadas todas las 5 notas y los 5 porcentajes para una materia calcule la nota final.
-    public static int calcularNotaFinal(double nota1, double nota2, double nota3, double nota4, double nota5,
+    public static int calcularNotaFinal(double nota1, double nota2, double nota3, double nota4, double nota5,)
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -314,54 +325,99 @@ public class CalculadoraPeso {
     }
 
     // Elaborar un algoritmo que dados los 5 porcentajes de una materia y las 4 primeras notas calcule cuánto tiene que sacar para ganar si el puntaje mínimo es 3.
-    public static int calcularNotaNecesaria(double porcentaje1, double porcentaje2, double porcentaje3, double porcentaje4, double porcentaje5, double nota1, double nota2, double nota3, double nota4) {
-        nota_final_minima = 3
-    nota_total = 0
-    for i in range(4):
-        nota_total += (notas[i] * porcentajes[i]) / 100
-    nota_quinta = (nota_final_minima * 100 - nota_total) / porcentajes[4]
-    return nota_quinta
-
-    porcentajes = []
-    notas = []
-
-    for i in range(5):
-        porcentaje = float(input(f"Ingrese el porcentaje {i+1} (%): "))
-        porcentajes.append(porcentaje)
-
-    for i in range(4):
-        nota = float(input(f"Ingrese la nota {i+1}: "))
-        notas.append(nota)
-
-    nota_quinta = calcular_nota_final(porcentajes, notas)
-    print(f"Debe sacar al menos {nota_quinta:.2f} en la quinta nota para ganar la materia.")
+    public class NotaMinima {
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+    
+            // Pedir los porcentajes de cada nota
+            System.out.println("Ingrese los porcentajes de cada nota (5 en total):");
+            double[] porcentajes = new double[5];
+            for (int i = 0; i < 5; i++) {
+                System.out.print("Porcentaje nota " + (i + 1) + ": ");
+                porcentajes[i] = scanner.nextDouble();
+            }
+    
+            // Pedir las primeras 4 notas
+            System.out.println("Ingrese las primeras 4 notas:");
+            double[] notas = new double[4];
+            for (int i = 0; i < 4; i++) {
+                System.out.print("Nota " + (i + 1) + ": ");
+                notas[i] = scanner.nextDouble();
+            }
+    
+            // Calcular la nota mínima necesaria
+            double notaMinima = calcularNotaMinima(porcentajes, notas);
+    
+            System.out.println("La nota mínima necesaria para ganar es: " + notaMinima);
+        }
+    
+        /**
+         * Calcula la nota mínima necesaria para ganar considerando los porcentajes y las primeras 4 notas.
+         *
+         * @param porcentajes Los porcentajes de cada nota (5 en total).
+         * @param notas       Las primeras 4 notas.
+         * @return La nota mínima necesaria para ganar.
+         */
+        public static double calcularNotaMinima(double[] porcentajes, double[] notas) {
+            double sumaPorcentajes = 0;
+            double sumaNotas = 0;
+    
+            // Calcular la suma de los porcentajes y las notas
+            for (int i = 0; i < 4; i++) {
+                sumaPorcentajes += porcentajes[i];
+                sumaNotas += notas[i] * porcentajes[i] / 100;
+            }
+    
+            // Calcular la nota mínima necesaria
+            double notaMinima = (3 - sumaNotas) / (porcentajes[4] / 100);
+    
+            return notaMinima;
+        }
     }
 
     // Se requiere un algoritmo para calcular el salario a pagar a un trabajador con los siguientes datos ingresados por teclado: cantidad de horas normales laboradas cantidad de horas extras diurnas laboradas cantidad de horas extras nocturnas laboradas valor de la hora normal. El valor de las horas extras diurnas tienen un recargo adicional del 15% sobre la hora normal. El valor de las horas extras nocturnas tienen un recargo adicional del 35% sobre la hora normal.
-    public static int calcularSalario(int horasNormales, int horasExtrasDiurnas, int horasExtrasNocturnas, double valorHoraNormal) {
-        horas_normales = float(input("Ingrese la cantidad de horas normales laboradas: "));
-        horas_extras_diurnas = float(input("Ingrese la cantidad de horas extras diurnas laboradas: "));
-        horas_extras_nocturnas = float(input("Ingrese la cantidad de horas extras nocturnas laboradas: "));
-        valor_hora_normal = float(input("Ingrese el valor de la hora normal: "));
+    public class SalarioTrabajador {
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
     
-        //Calculo del salario por horas normales
-        salario_normales = horas_normales * valor_hora_normal
+            // Pedir los datos al usuario
+            System.out.print("Ingrese la cantidad de horas normales laboradas: ");
+            double horasNormales = scanner.nextDouble();
     
-        //Calculo del salario por horas extras diurnas
-        valor_hora_extra_diurna = valor_hora_normal * 1.15
-        salario_extras_diurnas = horas_extras_diurnas * valor_hora_extra_diurna
+            System.out.print("Ingrese la cantidad de horas extras diurnas laboradas: ");
+            double horasExtrasDiurnas = scanner.nextDouble();
     
-        //Calculo del salario por horas extras nocturnas
-        valor_hora_extra_nocturna = valor_hora_normal * 1.35
-        salario_extras_nocturnas = horas_extras_nocturnas * valor_hora_extra_nocturna
+            System.out.print("Ingrese la cantidad de horas extras nocturnas laboradas: ");
+            double horasExtrasNocturnas = scanner.nextDouble();
     
-        //Calculo del salario total
-        salario_total = salario_normales + salario_extras_diurnas + salario_extras_nocturnas
+            System.out.print("Ingrese el valor de la hora normal: ");
+            double valorHoraNormal = scanner.nextDouble();
     
-return salario_total
+            // Calcular el salario a pagar
+            double salario = calcularSalario(horasNormales, horasExtrasDiurnas, horasExtrasNocturnas, valorHoraNormal);
     
-        salario_total = calcular_salario();
-        print(f"El salario a pagar es: ${salario_total:.2f}");
+            System.out.println("El salario a pagar es: " + salario);
+        }
+    
+        /**
+         * Calcula el salario a pagar a un trabajador considerando las horas normales, horas extras diurnas y nocturnas, y el valor de la hora normal.
+         *
+         * @param horasNormales      La cantidad de horas normales laboradas.
+         * @param horasExtrasDiurnas La cantidad de horas extras diurnas laboradas.
+         * @param horasExtrasNocturnas La cantidad de horas extras nocturnas laboradas.
+         * @param valorHoraNormal    El valor de la hora normal.
+         * @return El salario a pagar.
+         */
+        public static double calcularSalario(double horasNormales, double horasExtrasDiurnas, double horasExtrasNocturnas, double valorHoraNormal) {
+            // Calcular el valor de las horas extras diurnas y nocturnas
+            double valorHoraExtraDiurna = valorHoraNormal * 1.15;
+            double valorHoraExtraNocturna = valorHoraNormal * 1.35;
+    
+            // Calcular el salario a pagar
+            double salario = (horasNormales * valorHoraNormal) + (horasExtrasDiurnas * valorHoraExtraDiurna) + (horasExtrasNocturnas * valorHoraExtraNocturna);
+    
+            return salario;
+        }
     }
 
     // Diseñe un algoritmo que calcule el área de un triángulo rectángulo.
@@ -385,7 +441,6 @@ return salario_total
     }
 
     // Diseñe un algoritmo que calcule el perímetro de un cuadrado.
-    public static int calcularPerimetroCuadrado(double lado) {
         public class PerimetroCuadrado {
             public static double calcularPerimetroCuadrado() {
                 Scanner scanner = new Scanner(System.in);
@@ -404,7 +459,6 @@ return salario_total
     }
 
     // Diseñe un algoritmo que calcule el volumen de un cilindro.
-    public static int calcularVolumenCilindro(double radio, double altura) {
         public class VolumenCilindro {
             public static double calcularVolumenCilindro() {
                 Scanner scanner = new Scanner(System.in);
@@ -442,4 +496,4 @@ return salario_total
             }
         
     }
-}
+
